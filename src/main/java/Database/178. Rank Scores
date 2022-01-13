@@ -1,0 +1,10 @@
+SELECT
+  Score,
+  (SELECT count(*) FROM (SELECT distinct Score s FROM Scores) tmp WHERE s >= Score) 'Rank'
+FROM Scores
+ORDER BY Score desc
+
+2x
+SELECT score, DENSE_RANK() OVER (ORDER BY Score DESC) as 'rank'
+FROM Scores
+ORDER BY 'rank'
